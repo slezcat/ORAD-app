@@ -10,21 +10,17 @@ import Layout from "./Layout";
 
 export default function MyCard({ children, title }) {
   return (
-    <Layout>
-      <Card
-        sx={{
-          p: 4,
-        }}
-      >
-        <CardContent>
-          <MyStepper />
-          <Typography variant="h3" align="center">
-            {title}
-          </Typography>
-        </CardContent>
-
-        <CardActions>{children}</CardActions>
-      </Card>
-    </Layout>
+    <Card
+      sx={{
+        p: 4,
+      }}
+    >
+      <CardContent>
+        <Typography variant="h3" align="center">
+          {title}
+        </Typography>
+      </CardContent>
+      <CardActions>{children}</CardActions>
+    </Card>
   );
 }

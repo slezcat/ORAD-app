@@ -1,13 +1,13 @@
-import Gender from '../components/Gender'
-
-import React from 'react'
+import Gender from "../components/Gender";
+import MyCard from "../components/MyCard";
+import React from "react";
 
 function genderOption() {
   return (
     <>
-    <Gender/>
+      <Gender />
     </>
-  )
+  );
 }
 
-export default genderOption
+export default genderOption;
