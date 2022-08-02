@@ -1,12 +1,14 @@
-import GenderOption from "./pages/GenderOption";
+import { useSelector } from "react-redux/es/exports";
 import { red, blue } from "@mui/material/colors";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import AgeOption from "./pages/AgeOption";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import { useEffect, useState } from "react";
-import MyErrorSnackbar from "./components/MySnackbars";
+import AgeOption from "./pages/AgeOption";
+import MySnackbars from "./components/MySnackbars";
+import CssBaseline from "@mui/material/CssBaseline";
+import GenderOption from "./pages/GenderOption";
+import SymtomOption from "./pages/SymtomOption";
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -25,24 +27,44 @@ const theme = createTheme({
   },
 });
 
+const pages = [
+  {
+    path: "1",
+    element: <GenderOption />,
+  },
+  {
+    path: "2",
+    element: <AgeOption />,
+  },
+  {
+    path: "3",
+    element: <SymtomOption />,
+  },
+  
+];
+
 function App() {
-  const [isAllowed, setIsAllowed] = useState(true);
+  const {activeStep} = useSelector((state) => state.identifier);
+  const {option, message} = useSelector(state => state.snackbar);
 
   return (
     <>
+      <CssBaseline />
       <ThemeProvider theme={theme}>
         <Routes>
-          
           <Route path="/" element={<Layout />}>
-            
-            <Route path="1" element={<GenderOption />} />
-            <Route
-              path="2"
-              element={isAllowed ? <AgeOption /> : <Navigate to="/1" />}
-            />
+            {pages.map((p, i) => {
+              return (
+                <Route
+                  path={p.path}
+                  element={i === activeStep ? p.element : <Navigate to="/1" />}
+                  key={i}
+                />
+              );
+            })}
           </Route>
         </Routes>
-        <MyErrorSnackbar option="error"/>
+        <MySnackbars option={option} message={message} />
       </ThemeProvider>
     </>
   );

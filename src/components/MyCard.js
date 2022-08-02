@@ -1,12 +1,7 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import MyStepper from "./MyStepper";
-import Layout from "./Layout";
 
 export default function MyCard({ children, title }) {
   return (

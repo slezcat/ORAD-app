@@ -1,9 +1,9 @@
-import Container from "@mui/material/Container";
+import { Outlet } from "react-router-dom";
 import MyCard from "./MyCard";
 import MyStepper from "./MyStepper";
-import { Outlet } from "react-router-dom";
-import MyErrorSnackbar from "./MySnackbars";
-export default function Layout({children}) {
+import Container from "@mui/material/Container";
+
+export default function Layout() {
   return (
     <>
       <Container maxWidth="sm" sx={{ mt: 10 }}>

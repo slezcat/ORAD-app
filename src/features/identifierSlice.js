@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  name: "identifier",
-  // generalInformation: localStorage.getItem('GENDER') ? JSON.parse(localStorage.getItem('GENDER')) : [{
-  //     age: '',
-  //     gender: ''
-  // }],
-  generalInformation: [{}],
+  activeStep:0,
+  generalInformation: {
+    gender: '',
+    age: 0,
+  },
   knownSymptom: [{}],
 };
 
@@ -14,10 +13,13 @@ export const identifier = createSlice({
   name: "identifier",
   initialState,
   reducers: {
+    //adding user information
     general: (state, action) => {
-      //Taking information from the corresponding components, pake spread biar sebelumnya ketarik juga ke present contoh: dispatch(disease(componensatu([...prevComp, stateygdiambil])))
-      //Terus cek kondisi kalo memenuhi = demam ato = covid
-      state.generalInformation = action.payload;
+      state.generalInformation = {...state.generalInformation, ...action.payload};
+      state.activeStep += 1;
+    },
+    prevPage :(state, action) =>{
+      state.activeStep -= 1;
     },
     known: (state, action) => {
       state.knownSymptom = action.payload;
@@ -25,5 +27,5 @@ export const identifier = createSlice({
   },
 });
 
-export const { general, known } = identifier.actions;
+export const { general, known, prevPage } = identifier.actions;
 export default identifier.reducer;
