@@ -11,7 +11,7 @@ export default function MyCard({ children, title }) {
       }}
     >
       <CardContent>
-        <Typography variant="h3" align="center">
+        <Typography variant="h4" align="center">
           {title}
         </Typography>
       </CardContent>

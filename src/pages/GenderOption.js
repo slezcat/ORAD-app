@@ -1,24 +1,26 @@
-import { Button } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux/es/exports";
+import * as React from "react";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { Button, Grid } from "@mui/material";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";
 import { general, prevPage } from "../features/identifierSlice";
-import Radio from "@mui/material/Radio";
-import FormLabel from "@mui/material/FormLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import MaleIcon from "@mui/icons-material/Male";
+import FemaleIcon from "@mui/icons-material/Female";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
-//gender options
-const options = ["male", "female"];
-
-export default function GenderOption() {
+export default function ToggleButtons() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [gender, setGender] = useState("male");
+  const [gender, setGender] = React.useState("male");
 
-  const handleChange = (event) => {
-    setGender(event.target.value);
+  const handleGender = (event, newGender) => {
+    setGender(newGender);
   };
   //get the answer and go to next page
   const handleSubmit = () => {
@@ -26,27 +28,38 @@ export default function GenderOption() {
     navigate("/2");
   };
   //go to previous page
-  const back = () => {
-    dispatch(prevPage());
-  };
+  // const back = () => {
+  //   dispatch(prevPage());
+  // };
 
   return (
     <>
-      <FormControl required>
-        <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={gender}
-          onChange={handleChange}
-        >
-          {options.map((i) => (
-            <FormControlLabel value={i} control={<Radio />} label={i} />
-          ))}
-        </RadioGroup>
-        <Button onClick={handleSubmit}>Next</Button>
-        <Button onClick={back}>Back</Button>
-      </FormControl>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" alignItems="center">
+            <ToggleButtonGroup
+              value={gender}
+              exclusive
+              onChange={handleGender}
+              size="large"
+            >
+              <ToggleButton value="male" color="primary">
+                <MaleIcon />
+                <Typography>male</Typography>
+              </ToggleButton>
+              <ToggleButton value="female" color="primary">
+                <FemaleIcon />
+                <Typography>female</Typography>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid container justifyContent="flex-end" alignItems="center">
+            <Button onClick={handleSubmit}>Next</Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 }

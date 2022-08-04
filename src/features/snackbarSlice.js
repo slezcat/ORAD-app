@@ -15,7 +15,6 @@ const snackbar = createSlice ({
             state.isSnackOpen  = true; 
             state.option =  action.payload.option;
             state.message =  action.payload.message;
-            console.log(state.isSnackOpen)
         },
         closeSnack:(state) =>{ 
             state.isSnackOpen  = false;  

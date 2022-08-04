@@ -16,6 +16,9 @@ export const identifier = createSlice({
     //adding user information
     general: (state, action) => {
       state.generalInformation = {...state.generalInformation, ...action.payload};
+      if (state.activeStep===4){
+        return;
+      }
       state.activeStep += 1;
     },
     prevPage :(state, action) =>{
@@ -23,6 +26,10 @@ export const identifier = createSlice({
     },
     known: (state, action) => {
       state.knownSymptom = action.payload;
+      if (state.activeStep===4){
+        return;
+      }
+      state.activeStep += 1;
     },
   },
 });
