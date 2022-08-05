@@ -23,11 +23,13 @@ const NameOption = () => {
     <Grid container>
       <Grid item xs={12}>
         <TextField
+          
           required
           fullWidth
           id="outlined-basic"
           label="Your name"
           variant="outlined"
+          placeholder="E.g. slezcat"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />

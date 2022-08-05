@@ -10,6 +10,9 @@ import GenderOption from "./pages/GenderOption";
 import SymtomOption from "./pages/SymtomOption";
 import Result from "./pages/Result";
 import NameOption from "./pages/NameOption";
+import { openSnack } from "./features/snackbarSlice";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import {useEffect}  from "react"
 
 const theme = createTheme({
   palette: {
@@ -61,6 +64,14 @@ const pages = [
 function App() {
   const { activeStep } = useSelector((state) => state.identifier);
   const { option, message } = useSelector((state) => state.snackbar);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      openSnack({ option: "warning", message: "This is a demo app by slezcat" })
+    );
+  },[dispatch]);
 
   return (
     <>

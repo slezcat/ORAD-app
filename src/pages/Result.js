@@ -39,6 +39,7 @@ const Result = () => {
     }
   };
 
+
   return (
     <Box>
       <Typography variant="h6">
