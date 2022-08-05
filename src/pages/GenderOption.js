@@ -1,8 +1,4 @@
 import * as React from "react";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Button, Grid } from "@mui/material";
@@ -12,7 +8,6 @@ import { general, prevPage } from "../features/identifierSlice";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/system";
 
 export default function ToggleButtons() {
   const dispatch = useDispatch();
@@ -22,15 +17,14 @@ export default function ToggleButtons() {
   const handleGender = (event, newGender) => {
     setGender(newGender);
   };
-  //get the answer and go to next page
   const handleSubmit = () => {
     dispatch(general({ gender }));
-    navigate("/2");
+    navigate("/3");
   };
-  //go to previous page
-  // const back = () => {
-  //   dispatch(prevPage());
-  // };
+  const handleBack = () => {
+    dispatch(prevPage());
+    navigate("/1");
+  };
 
   return (
     <>
@@ -55,8 +49,13 @@ export default function ToggleButtons() {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Grid container justifyContent="flex-end" alignItems="center">
-            <Button onClick={handleSubmit}>Next</Button>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Button onClick={handleBack} variant="text" color="primary">
+              Back
+            </Button>
+            <Button onClick={handleSubmit} variant="text" color="primary">
+              Next
+            </Button>
           </Grid>
         </Grid>
       </Grid>

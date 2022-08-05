@@ -1,18 +1,19 @@
 import { useSelector } from "react-redux/es/exports";
 import { red, blue } from "@mui/material/colors";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Layout from "./components/Layout";
 import AgeOption from "./pages/AgeOption";
 import MySnackbars from "./components/MySnackbars";
 import CssBaseline from "@mui/material/CssBaseline";
 import GenderOption from "./pages/GenderOption";
-import SymtomOption, { MultipleSymtomOption } from "./pages/SymtomOption";
+import SymtomOption from "./pages/SymtomOption";
 import Result from "./pages/Result";
+import NameOption from "./pages/NameOption";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     red: {
       main: red[500],
       light: red[100],
@@ -30,24 +31,29 @@ const theme = createTheme({
 
 const pages = [
   {
-    title: "What is your gender?",
+    title: "Enter your name",
     path: "1",
+    element: <NameOption />,
+  },
+  {
+    title: "What is your Gender?",
+    path: "2",
     element: <GenderOption />,
   },
   {
-    title: "What is your age?",
-    path: "2",
+    title: "What is your Age?",
+    path: "3",
     element: <AgeOption />,
   },
   {
-    title: "What is your symtom?",
-    path: "3",
+    title: "What is your Symptom?",
+    path: "4",
     element: <SymtomOption />,
   },
 
   {
-    title: "Result",
-    path: "4",
+    title: "Differential Diagnosis",
+    path: "5",
     element: <Result />,
   },
 ];
@@ -58,8 +64,8 @@ function App() {
 
   return (
     <>
-      <CssBaseline />
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Routes>
           <Route path="/" element={<Navigate to="/1" />} />
           {pages.map((p, i) => {

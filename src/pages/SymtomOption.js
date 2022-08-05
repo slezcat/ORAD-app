@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { accordionDetailsClasses, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";
@@ -15,15 +15,27 @@ export default function SymtomOption() {
   const [symtom, setSymtom] = useState(data);
 
   const handleSubmit = () => {
-    for (let el of symtom){
-      if (el.b === undefined){
-        return dispatch(openSnack({ option: "error", message: "Please add all fields!" }));
+    for (let el of symtom) {
+      if (el.b === undefined) {
+        return dispatch(
+          openSnack({ option: "error", message: "Please add all fields!" })
+        );
       }
     }
-    dispatch(openSnack({ option: "success", message: "Data has been recorded succesfully!" }));
+    dispatch(
+      openSnack({
+        option: "success",
+        message: "Data has been recorded succesfully!",
+      })
+    );
     dispatch(known(symtom));
-    navigate("/4")
-    console.log(symtom)
+    navigate("/5");
+  };
+
+  const handleBack = () => {
+    dispatch(prevPage());
+    setSymtom(data);
+    navigate("/3");
   };
 
   return (
@@ -44,9 +56,9 @@ export default function SymtomOption() {
                       result = result.map((el) => {
                         if (p.id === el.id) {
                           el.b = v;
-                        }          
+                        }
                         return el;
-                      });    
+                      });
                       setSymtom(result);
                     }}
                     renderInput={(params) => (
@@ -80,7 +92,7 @@ export default function SymtomOption() {
                         }
                         return el;
                       });
-                     
+
                       setSymtom(result);
                     }}
                     fullWidth={true}
@@ -90,9 +102,17 @@ export default function SymtomOption() {
             })}
           </Grid>
           <Grid item xs={12}>
-            <Grid container justifyContent="flex-end" alignItems="center">
-              <Button onClick={handleSubmit} sx={{ mt: 1 }}>
-                Next
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ mt: 2 }}
+            >
+              <Button onClick={handleBack} variant="text" color="primary">
+                Back
+              </Button>
+              <Button onClick={handleSubmit} variant="text" color="success">
+                Find
               </Button>
             </Grid>
           </Grid>
@@ -101,28 +121,7 @@ export default function SymtomOption() {
     </>
   );
 }
-export function MultipleSymtomOption() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [symtom, setSymtom] = useState("");
 
-  const handleOnChange = (event, newSymtom) => {
-    setSymtom(newSymtom);
-  };
-
-  const handleSubmit = () => {
-    dispatch(general({ symtom }));
-  };
-  return (
-    <Stack spacing={3} sx={{ width: 500 }}>
-      <Grid container justifyContent="flex-end" alignItems="center">
-        <Button onClick={handleSubmit} sx={{ mt: 1 }}>
-          Next
-        </Button>
-      </Grid>
-    </Stack>
-  );
-}
 // data
 const data = [
   {
@@ -135,7 +134,7 @@ const data = [
     ],
     id: 1,
   },
-  
+
   {
     q: "Dimanakah lokasi yang terasa sakit? ",
     a: ["rahang atas", "rahang bawah"],
@@ -167,7 +166,7 @@ const data = [
     a: ["ringan", "sedang", "berat"],
     id: 6,
   },
-  
+
   {
     q: "Apa saja faktor yang memperparah rasa sakit? ",
     a: [
@@ -187,8 +186,7 @@ const data = [
     a: ["ya", "tidak"],
     id: 9,
   },
-]
-
+];
 
 const multipleSelectionSymtoms = [
   {

@@ -37,8 +37,13 @@ export default function InputSlider() {
   };
 
   const handleSubmit = () => {
-    dispatch(general({ age : value }));
-    navigate("/3");
+    dispatch(general({ age: value }));
+    navigate("/4");
+  };
+
+  const handleBack = () => {
+    dispatch(prevPage());
+    navigate("/2");
   };
 
   return (
@@ -70,8 +75,13 @@ export default function InputSlider() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Grid container justifyContent="flex-end" alignItems="center">
-            <Button onClick={handleSubmit}>Next</Button>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Button onClick={handleBack} variant="text" color="primary">
+              Back
+            </Button>
+            <Button onClick={handleSubmit} variant="text" color="primary">
+              Next
+            </Button>
           </Grid>
         </Grid>
       </Grid>
