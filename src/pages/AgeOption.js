@@ -1,11 +1,8 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
-import VolumeUp from "@mui/icons-material/VolumeUp";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";

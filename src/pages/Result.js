@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import { identifier } from "../features/identifierSlice";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 
