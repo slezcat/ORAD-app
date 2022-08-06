@@ -3,42 +3,43 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
+import identifierSlice from "../features/identifierSlice";
 
 const Result = () => {
   const { knownSymptom, generalInformation } = useSelector(
     (state) => state.identifier
   );
-  const jaw1 = () => {
-    const j = knownSymptom;
-    if (
-      j[0].b[0] === j[0].a[0] &&
-      j[1].b === j[1].a[0] &&
-      j[2].b === j[2].a[0] &&
-      j[3].b === j[3].a[0] &&
-      j[4].b === j[4].a[0] &&
-      j[5].b === j[5].a[0] &&
-      j[6].b[0] === j[6].a[0] &&
-      j[7].b === j[7].a[0] &&
-      j[8].b === j[8].a[0]
-    ) {
-      return "Pulpitis irreversible symptomatic with periodontitis Apicalis Symptomatic";
-    } else if (
-      j[0].b[0] === (j[0].a[0] || j[0].a[1] || j[0].a[2]) &&
-      j[1].b === j[1].a[1] &&
-      j[2].b === j[2].a[1] &&
-      j[3].b === j[3].a[4] &&
-      j[4].b === j[4].a[1] &&
-      j[5].b === j[5].a[1] &&
-      j[6].b[0] === (j[6].a[0] || j[6].a[1]) &&
-      j[7].b === j[7].a[0] &&
-      j[8].b === j[8].a[0]
-    ) {
-      return "Periodontitis";
-    } else {
-      return "sorry, no combination can be found!";
+
+  const generateBinary = (optLength, list) => {
+    let tempArr = new Array(optLength).fill("0");
+    for (let i = 0; i < list.length; i++) {
+      tempArr[tempArr.length - 1 - list[i]] = "1";
     }
+    return "" + parseInt(tempArr.join(""), 2);
   };
 
+  const jaw1 = () => {
+    const j = knownSymptom;
+    let key = "";
+    for (let i = 0; i < j.length; i++) {
+      if (Array.isArray(j[i].b)) {
+        key += (i === 0 ? "" : "-") + generateBinary(j[i].a.length, j[i].b);
+      } else {
+        key += (i === 0 ? "" : "-") + j[i].b;
+      }
+    }
+    const [f, ...rest] = key;
+    const key1 = `${f}-0-0-0-0-0-1-0-0`;
+    const key2 = `${
+      f === "2" || f === "3" || f === "5" ? f : "0"
+    }-0-0-0-0-0-1-0-0`;
+    
+    const DIAGNOSE = {
+      [key1]: "predidintitis",
+      [key2]: "gatau",
+    };
+    return DIAGNOSE[key];
+  };
 
   return (
     <Box>

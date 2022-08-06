@@ -3,7 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useState } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";
-import {  prevPage, known } from "../features/identifierSlice";
+import { prevPage, known } from "../features/identifierSlice";
 import { Button, Grid } from "@mui/material";
 import { openSnack } from "../features/snackbarSlice";
 
@@ -49,12 +49,13 @@ export default function SymtomOption() {
                     multiple
                     id="tags-standard"
                     options={p.a}
-                    getOptionLabel={(option) => option}
+                    getOptionLabel={(option) => option.label}
                     onChange={(e, v) => {
                       let result = symtom;
                       result = result.map((el) => {
                         if (p.id === el.id) {
-                          el.b = v;
+                          el.b = v.map((opt) => opt.id).sort();
+                          console.log(el.b);
                         }
                         return el;
                       });
@@ -87,11 +88,11 @@ export default function SymtomOption() {
                       let result = symtom;
                       result = result.map((el) => {
                         if (p.id === el.id) {
-                          el.b = v;
+                          el.b = v.id;
+                          console.log(el.b)
                         }
                         return el;
                       });
-
                       setSymtom(result);
                     }}
                     fullWidth={true}
@@ -133,7 +134,6 @@ const data = [
     ],
     id: 1,
   },
-
   {
     q: "Dimanakah lokasi yang terasa sakit? ",
     a: ["rahang atas", "rahang bawah"],
@@ -191,19 +191,19 @@ const multipleSelectionSymtoms = [
   {
     q: "Keluhan apa saja yang sedang anda rasakan saat ini?",
     a: [
-      "makanan menyelip",
-      "gigi terasa ngilu",
-      "gigi terasa sakit",
-      "area sekitar gusi / gusi disertai pembengkakan",
+      { label: "makanan menyelip", id: 0 },
+      { label: "gigi terasa ngilu", id: 1 },
+      { label: "gigi terasa sakit", id: 2 },
+      { label: "area sekitar gusi / gusi disertai pembengkakan", id: 3 },
     ],
     id: 1,
   },
   {
     q: "Apa saja faktor yang memperparah rasa sakit? ",
     a: [
-      "makanan asam / manis",
-      "makanan / minuman dingin",
-      "makanan / minuman panas",
+      { label: "makanan asam / manis", id: 0 },
+      { label: "makanan / minuman dingin", id: 1 },
+      { label: "makanan / minuman panas", id: 2 },
     ],
     id: 7,
   },
@@ -212,44 +212,62 @@ const multipleSelectionSymtoms = [
 const symtoms = [
   {
     q: "Keluhan apa saja yang sedang anda rasakan saat ini? ",
-    a: ["rahang atas", "rahang bawah"],
+    a: [
+      { label: "rahang atas", id: 0 },
+      { label: "rahang bawah", id: 1 },
+    ],
     id: 2,
   },
   {
     q: "Pada gigi bagian mana rasa sakit tersebut dirasakan?",
-    a: ["gigi bagian depan", "gigi bagian belakang"],
+    a: [
+      { label: "gigi bagian depan", id: 0 },
+      { label: "gigi bagian belakang", id: 1 },
+    ],
     id: 3,
   },
   {
     q: "Sejak kapan rasa sakit tersebut berlangsung? ",
     a: [
-      "beberapa jam yang lalu",
-      "beberapa hari yang lalu",
-      "beberapa minggu yang lalu",
-      "beberapa bulan yang lalu",
-      "beberapa tahun yang lalu",
+      { label: "beberapa jam yang lalu", id: 0 },
+      { label: "beberapa hari yang lalu", id: 1 },
+      { label: "beberapa minggu yang lalu", id: 2 },
+      { label: "beberapa tahun yang lalu", id: 3 },
+      { label: "beberapa bulan yang lalu", id: 4 },
     ],
     id: 4,
   },
   {
     q: "Bagaimana rasa sakit tersebut dapat timbul?  ",
-    a: ["spontanitas", "hilang timbul"],
+    a: [
+      { label: "spontanitas", id: 0 },
+      { label: "hilang timbul", id: 1 },
+    ],
     id: 5,
   },
   {
     q: "Seberapa berat rasa sakit yang dirasakan?   ",
-    a: ["ringan", "sedang", "berat"],
+    a: [
+      { label: "ringan", id: 0 },
+      { label: "sedang", id: 1 },
+      { label: "berat", id: 2 },
+    ],
     id: 6,
   },
   {
     q: "Apakah rasa sakit timbul saat dipakai mengunyah?    ",
-    a: ["ya", "tidak"],
+    a: [
+      { label: "ya", id: 0 },
+      { label: "tidak", id: 1 },
+    ],
     id: 8,
   },
   {
     q: "Apakah saat rasa sakit timbul, disertai dengan demam?     ",
-    a: ["ya", "tidak"],
+    a: [
+      { label: "ya", id: 0 },
+      { label: "tidak", id: 1 },
+    ],
     id: 9,
   },
 ];
-
