@@ -25,7 +25,7 @@ const Result = () => {
       if (Array.isArray(j[i].b)) {
         key += (i === 0 ? "" : "-") + generateBinary(j[i].a.length, j[i].b);
       } else {
-        key += (i === 0 ? "" : "-") + j[i].b;
+        key += (i === 0 ? "" : "-") + j[i].b; 
       }
     }
     const [f, ...rest] = key;
