@@ -32,19 +32,21 @@ const Result = () => {
     const key1 = `${f}-0-0-0-0-0-1-0-0`;
     const key2 = `${
       f === "2" || f === "3" || f === "5" ? f : "0"
-    }-0-0-0-0-0-1-0-0`;
-    
+    }-0-0-0-0-0-1-0-0`;     
+
     const DIAGNOSE = {
       [key1]: "predidintitis",
       [key2]: "gatau",
     };
+    console.log(DIAGNOSE[key])
     return DIAGNOSE[key];
   };
 
   return (
     <Box>
       <Typography variant="h6">
-        Name : {generalInformation.name}
+        Name :
+        {generalInformation.name + "." + " " + generalInformation.lastName}
         <br />
         Gender : {generalInformation.gender}
         <br />

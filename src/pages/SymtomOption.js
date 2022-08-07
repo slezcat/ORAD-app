@@ -58,7 +58,7 @@ export default function SymtomOption() {
                           console.log(v, 'this is the vlue for MultipleSelection Symptoms')
                           el.b = v.map((opt) => opt.id).sort();
                           
-                          console.log(el.b, 'this is the answers for multiple symptoms');
+                          console.log(v.map((opt) => opt.id), 'multiple symp');
                         }
                         return el;
                       });
