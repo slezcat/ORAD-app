@@ -5,7 +5,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 
-const steps = ["Select Gender", "Select Age", "Select Symptom"];
+const steps = ["Type a Name", "Select Gender", "Select Age", "Select Symptom"];
 
 export default function HorizontalLinearStepper() {
   const { activeStep } = useSelector((state) => state.identifier);
