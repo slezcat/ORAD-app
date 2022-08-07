@@ -7,12 +7,16 @@ import { Button } from "@mui/material";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";
 import { general, prevPage } from "../features/identifierSlice";
+import { useSelector } from "react-redux";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
 export default function InputSlider() {
+  const { generalInformation } = useSelector((state) => state.identifier)
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [value, setValue] = React.useState(30);

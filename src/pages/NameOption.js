@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,15 @@ import { useSelector } from "react-redux";
 
 const NameOption = () => {
   const { generalInformation } = useSelector((state) => state.identifier);
-
   const [name, setName] = useState("");
+
+  useEffect(() => {
+    setName(generalInformation.name)
+  }, [generalInformation])
+
+  const generalIsTrue = generalInformation.name?.length < 1;
+  const nameIsTrue = name?.length < 1;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -21,7 +28,7 @@ const NameOption = () => {
           message: "Please remove any whitespaces!",
         })
       );
-    } else if (name.length < 1) {
+    } else if (generalIsTrue || nameIsTrue) {
       return dispatch(
         openSnack({
           option: "error",
@@ -30,9 +37,12 @@ const NameOption = () => {
       );
     } else {
       dispatch(general({ name }));
+
+
       navigate("/2");
     }
   };
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -43,7 +53,7 @@ const NameOption = () => {
           label="Your name"
           variant="outlined"
           placeholder="E.g. slezcat"
-          value={name || generalInformation.name || ''}
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </Grid>
