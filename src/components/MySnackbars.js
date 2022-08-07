@@ -50,8 +50,8 @@ export default function MySnackbars({ option, message }) {
         autoHideDuration={4000}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: "bottom",
+          horizontal: "right",
         }}
       >
         <Alert

@@ -7,7 +7,9 @@ export default function MyCard({ children, title }) {
   return (
     <Card
       sx={{
-        p: 4,
+        p: 2,
+      
+        width: "100%"
       }}
     >
       <CardContent>

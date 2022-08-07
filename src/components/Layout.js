@@ -7,14 +7,19 @@ import { Typography } from "@mui/material";
 export default function Layout({ title }) {
   return (
     <>
-    <Typography variant="subtitle1" sx={{ m: 1 }} color="primary">slezcat &copy; 2022</Typography>
-      <Container maxWidth="sm" sx={{ mt: 10 }}>
-        <MyStepper />
+      <MyStepper />
+      <Container
+        maxWidth="sm"
+        sx={{
+          mt: "4vw",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <MyCard title={title}>
           <Outlet />
         </MyCard>
       </Container>
-      
     </>
-  );  
+  );
 }

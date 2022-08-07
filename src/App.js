@@ -12,6 +12,7 @@ import Result from "./pages/Result";
 import NameOption from "./pages/NameOption";
 import { openSnack } from "./features/snackbarSlice";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import MyStepper from "./components/MyStepper"
 import {useEffect}  from "react"
 
 const theme = createTheme({
@@ -78,10 +79,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
+          
           <Route path="/" element={<Navigate to="/1" />} />
           {pages.map((p, i) => {
             return (
-              <Route element={<Layout title={p.title} />} key={i}>
+              <Route element={<Layout title={p.title} /> } key={i}>
                 <Route
                   path={p.path}
                   element={i === activeStep ? p.element : <Navigate to="/1" />}

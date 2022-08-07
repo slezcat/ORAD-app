@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 
 const steps = ["Type a Name", "Select Gender", "Select Age", "Select Symptom"];
 
-export default function HorizontalLinearStepper() {
+export default function MyStepper() {
   const { activeStep } = useSelector((state) => state.identifier);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" ,mt:"2vw",px:"5vw"}}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -23,20 +23,7 @@ export default function HorizontalLinearStepper() {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-        </>
-      ) : (
-        <>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-          </Box>
-        </>
-      )}
+     
     </Box>
   );
 }
