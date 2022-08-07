@@ -19,10 +19,11 @@ const Result = () => {
   };
 
   const jaw1 = () => {
-    const j = knownSymptom;
+    const j = knownSymptom; // Semua pertanyaan
     let key = "";
     for (let i = 0; i < j.length; i++) {
-      if (Array.isArray(j[i].b)) {
+      // Kalo i lebih kecil daripada j.length (j.length itu di knownsymptom dan total di knownsymptom)
+      if (Array.isArray(j[i].b)) { // meng select semua multiple
         key += (i === 0 ? "" : "-") + generateBinary(j[i].a.length, j[i].b);
       } else {
         key += (i === 0 ? "" : "-") + j[i].b;
@@ -46,7 +47,8 @@ const Result = () => {
     <Box>
       <Typography variant="h6">
         Name :
-        {generalInformation.name + "." + " " + generalInformation.lastName}
+        {generalInformation.name + "."}
+        {generalInformation?.lastName === undefined ? '' : ' ' + generalInformation.lastName}
         <br />
         Gender : {generalInformation.gender}
         <br />

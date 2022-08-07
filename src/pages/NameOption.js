@@ -6,7 +6,6 @@ import { general } from "../features/identifierSlice";
 import { Button, Grid } from "@mui/material";
 import { openSnack } from "../features/snackbarSlice";
 import { useSelector } from "react-redux";
-import { red } from "@mui/material";
 
 const NameOption = () => {
   const { generalInformation } = useSelector((state) => state.identifier);
@@ -25,7 +24,9 @@ const NameOption = () => {
   const navigate = useNavigate();
   const handleSubmit = () => {
     try {
-      if ((name).includes(" ") || (lastName).includes(" ")) {
+      if (
+        name.includes(" ")
+      ) {
         return dispatch(
           openSnack({
             option: "error",
@@ -42,15 +43,15 @@ const NameOption = () => {
       } else {
         dispatch(general({ name, lastName }));
         navigate("/2");
-      } 
+      }
     } catch {
       return dispatch(
         openSnack({
           option: "error",
-          message: "Please provide with a name",  
+          message: "Please provide with a name",
         })
       );
-    } 
+    }
   };
 
   return (
@@ -77,10 +78,10 @@ const NameOption = () => {
         <TextField
           fullWidth
           id="outlined-basic"
-          label="Last name"
+          label="Middle & Last name"
           variant="outlined"
           placeholder="E.g. cat"
-          value={lastName || ''}
+          value={lastName || ""}
           onChange={(e) => setLastName(e.target.value)}
         />
       </Grid>
@@ -90,7 +91,7 @@ const NameOption = () => {
           justifyContent="flex-end"
           alignItems="center"
           sx={{ mt: 2 }}
-        > 
+        >
           <Button onClick={handleSubmit} variant="text" color="primary">
             Next
           </Button>
