@@ -11,11 +11,14 @@ export default function SymtomOption() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [symtom, setSymtom] = useState(data);
+  const [symtom, setSymtom] = useState();
 
   const handleSubmit = () => {
+    // for loop element yang ada di symtom
     for (let el of symtom) {
+      console.log(el);
       if (el.b === undefined) {
+        // pengecekan kalau semuanya dipilih (kalo salah satu ada yang undefined akan meng return opensnack hence the loop)
         return dispatch(
           openSnack({ option: "error", message: "Please add all fields!" })
         );
@@ -27,13 +30,12 @@ export default function SymtomOption() {
         message: "Data has been recorded succesfully!",
       })
     );
-    dispatch(known(symtom));
+    dispatch(known(symtom)); // known yang ada di identifier akan di call dan dimasukkan symtom;;; contoh dalam identifier: known: (state.action) => { state.knownSymptom = action.payload}
     navigate("/5");
   };
 
   const handleBack = () => {
     dispatch(prevPage());
-    setSymtom(data);
     navigate("/3");
   };
 
@@ -41,7 +43,7 @@ export default function SymtomOption() {
     <>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Grid container rowSpacing={2}>
+          <Grid container rowSpacing={2}> 
             {multipleSelectionSymtoms.map((p, i) => {
               return (
                 <Grid item xs={12}>
@@ -51,11 +53,15 @@ export default function SymtomOption() {
                     options={p.a}
                     getOptionLabel={(option) => option.label}
                     onChange={(e, v) => {
-                      let result = symtom;
-                      result = result.map((el) => {
+                      let result = data.map((el) => {
                         if (p.id === el.id) {
+                          console.log(v, "this is v in onchange");
                           el.b = v.map((opt) => opt.id).sort();
-                          console.log(el.b);
+
+                          console.log(
+                            v.map((opt) => opt.id),
+                            "this is mapped v search for an id"
+                          );
                         }
                         return el;
                       });
@@ -85,11 +91,9 @@ export default function SymtomOption() {
                       <TextField {...params} label={p.q} />
                     )}
                     onChange={(e, v) => {
-                      let result = symtom;
-                      result = result.map((el) => {
+                      let result = data.map((el) => {
                         if (p.id === el.id) {
                           el.b = v.id;
-                          console.log(el.b)
                         }
                         return el;
                       });
