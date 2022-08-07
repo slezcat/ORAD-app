@@ -22,7 +22,7 @@ export default function InputSlider() {
   const [value, setValue] = React.useState(30);
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(newValue); 
   };
 
   const handleInputChange = (event) => {

@@ -12,8 +12,8 @@ const NameOption = () => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    setName(generalInformation.name)
-  }, [generalInformation])
+    setName(generalInformation.name);
+  }, [generalInformation]);
 
   const generalIsTrue = generalInformation.name?.length < 1;
   const nameIsTrue = name?.length < 1;
@@ -21,25 +21,32 @@ const NameOption = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = () => {
-    if (name.includes(" ")) {
-      return dispatch(
-        openSnack({
-          option: "error",
-          message: "Please remove any whitespaces!",
-        })
-      );
-    } else if (generalIsTrue || nameIsTrue) {
+    try {
+      if (name.includes(" ")) {
+        return dispatch(
+          openSnack({
+            option: "error",
+            message: "Please remove any whitespaces!",
+          })
+        );
+      } else if (generalIsTrue || nameIsTrue) {
+        return dispatch(
+          openSnack({
+            option: "error",
+            message: "Please provide with a name",
+          })
+        );
+      } else {
+        dispatch(general({ name }));
+        navigate("/2");
+      }
+    } catch {
       return dispatch(
         openSnack({
           option: "error",
           message: "Please provide with a name",
         })
       );
-    } else {
-      dispatch(general({ name }));
-
-
-      navigate("/2");
     }
   };
 
@@ -53,7 +60,7 @@ const NameOption = () => {
           label="Your name"
           variant="outlined"
           placeholder="E.g. slezcat"
-          value={name}
+          value={name || ""}
           onChange={(e) => setName(e.target.value)}
         />
       </Grid>
