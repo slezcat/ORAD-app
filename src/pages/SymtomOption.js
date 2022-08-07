@@ -15,6 +15,7 @@ export default function SymtomOption() {
 
   const handleSubmit = () => {
     for (let el of symtom) {
+      console.log(el)
       if (el.b === undefined) {
         return dispatch(
           openSnack({ option: "error", message: "Please add all fields!" })
@@ -54,8 +55,10 @@ export default function SymtomOption() {
                       let result = symtom;
                       result = result.map((el) => {
                         if (p.id === el.id) {
+                          console.log(v, 'this is the vlue for MultipleSelection Symptoms')
                           el.b = v.map((opt) => opt.id).sort();
-                          console.log(el.b);
+                          
+                          console.log(el.b, 'this is the answers for multiple symptoms');
                         }
                         return el;
                       });
@@ -89,7 +92,6 @@ export default function SymtomOption() {
                       result = result.map((el) => {
                         if (p.id === el.id) {
                           el.b = v.id;
-                          console.log(el.b)
                         }
                         return el;
                       });

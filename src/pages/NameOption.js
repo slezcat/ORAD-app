@@ -11,19 +11,31 @@ const NameOption = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = () => {
-    if (name === "") {
+    if (name.includes(" ")) {
       return dispatch(
-        openSnack({ option: "error", message: "Please enter your name!" })
+        openSnack({
+          option: "error",
+          message: "Please remove any whitespaces!",
+        })
       );
+    } else if (name.length < 1) {
+      return dispatch(
+        openSnack({
+          option: "error",
+          message: 'Please provide with a name'
+        })
+      )
+
+     
+    } else {
+      dispatch(general({ name }));
+      navigate("/2");
     }
-    dispatch(general({ name }));
-    navigate("/2");
   };
   return (
     <Grid container>
       <Grid item xs={12}>
         <TextField
-          
           required
           fullWidth
           id="outlined-basic"
