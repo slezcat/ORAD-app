@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { general } from "../features/identifierSlice";
 import { Button, Grid } from "@mui/material";
 import { openSnack } from "../features/snackbarSlice";
+import { useSelector } from "react-redux";
 
 const NameOption = () => {
+  const { generalInformation } = useSelector((state) => state.identifier);
+
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,11 +25,9 @@ const NameOption = () => {
       return dispatch(
         openSnack({
           option: "error",
-          message: 'Please provide with a name'
+          message: "Please provide with a name",
         })
-      )
-
-     
+      );
     } else {
       dispatch(general({ name }));
       navigate("/2");
@@ -42,7 +43,7 @@ const NameOption = () => {
           label="Your name"
           variant="outlined"
           placeholder="E.g. slezcat"
-          value={name}
+          value={name || generalInformation.name || ''}
           onChange={(e) => setName(e.target.value)}
         />
       </Grid>
